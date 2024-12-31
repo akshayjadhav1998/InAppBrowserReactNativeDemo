@@ -4,19 +4,20 @@ import WebView from 'react-native-webview';
 
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import RouterParams from '../router/routerParams';
 
-type RootStackParamList = {
-  InAppBrowser: { url: string };
-  Home: undefined;
+type InAppBrowserProps = {
+    route: RouteProp<RouterParams, 'InAppBrowser'>;
+    navigation: StackNavigationProp<RouterParams, 'InAppBrowser'>;
 };
 
-const InAppBrowser = ({ route, navigation }: { route: RouteProp<RootStackParamList, 'InAppBrowser'>; navigation: StackNavigationProp<RootStackParamList, 'InAppBrowser'> }) => {
+const InAppBrowser : React.FC<InAppBrowserProps> = ({ route, navigation }) => {
 
     const { url } = route.params;
 
     const handleNavigationToHome = (navState: any) => {
       if(navState.url === 'https://www.myntra.com/men-jeans?sort=popularity') {
-        navigation.navigate('Home', undefined);
+        navigation.replace('Home');
         console.log('Navigated to Home screen');
       }
     };
@@ -25,6 +26,7 @@ const InAppBrowser = ({ route, navigation }: { route: RouteProp<RootStackParamLi
         <WebView
         source = {{uri: url}}
         onNavigationStateChange={handleNavigationToHome}
+        startInLoadingState={true}
         />
     </View>;
 };

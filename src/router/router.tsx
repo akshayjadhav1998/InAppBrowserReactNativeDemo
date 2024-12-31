@@ -4,9 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../components/Login';
 import Home from '../components/Home';
 import InAppBrowser from '../components/InAppBrowser';
+import RouterParams from './routerParams';
+
 
 const Router = () => {
-    const Stack = createNativeStackNavigator();
+    const Stack = createNativeStackNavigator<RouterParams>();
 
     return (
         <NavigationContainer>
@@ -19,7 +21,7 @@ const Router = () => {
             initialRouteName="Login">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="InAppBrowser" component={InAppBrowser} />
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Home" component={Home} options={{ headerShown: false }}  />
         </Stack.Navigator>
         </NavigationContainer>
     );
